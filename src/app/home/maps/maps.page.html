@@ -7,11 +7,16 @@
 
 <ion-content>
 
-  <div #map id="map"></div>
+    <div class="map-wrapper">
+        <div id="map_center">
+          
+        </div>
+        <div #map id="map"></div>
+      </div>
+      <div id="address">
+        <span>{{address}}</span>
+      </div>
 
 </ion-content>
 
 
-<script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeS0aNeEcW1qeCHJgyEGuVM3E6lH0MjK0&callback=initMap">
-</script>
