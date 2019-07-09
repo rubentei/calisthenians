@@ -1,11 +1,17 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>maps</ion-title>
+    <!-- <ion-button (click)="loadMap()" shape="round" fill="outline"></ion-button> -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<div class="text-center mt-5">
-  <h3>BOLI</h3>
-</div>
+
+  <div #map id="map"></div>
+
 </ion-content>
+
+
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeS0aNeEcW1qeCHJgyEGuVM3E6lH0MjK0&callback=initMap">
+</script>

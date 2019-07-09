@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 import { MapsPageModule } from './maps/maps.module';
+import { MapsPage } from './maps/maps.page';
 
 
 
@@ -19,7 +20,9 @@ import { MapsPageModule } from './maps/maps.module';
       {
         path: '',
         component: HomePage
-      }
+      },
+      { path: '/maps',
+        component: MapsPage}
     ])
   ],
   declarations: [HomePage],
