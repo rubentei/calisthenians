@@ -1,9 +1,29 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>event-card</ion-title>
+    <ion-title>Calisthenians</ion-title>
+    <ion-buttons slot="start">
+    <ion-back-button defaultHref="events"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  
+  <ion-card>
+    <ion-item>
+      <ion-icon name="pin" slot="start"></ion-icon>
+      <ion-label>Parque</ion-label>
+    </ion-item>
+          
+    <ion-card-content>
+      Lugar,Fecha, detalles
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button shape="round" fill="outline">Apuntarme</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
