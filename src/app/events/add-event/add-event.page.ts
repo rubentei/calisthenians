@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 @Component({
   selector: 'app-add-event',
   templateUrl: './add-event.page.html',
@@ -13,21 +13,20 @@ export class AddEventPage {
   customDayShortNames = ['s\u00f8n', 'man', 'tir', 'ons', 'tor', 'fre', 'l\u00f8r'];
   customPickerOptions: any;
 
-  constructor() { 
-    
+  constructor() {   
     this.customPickerOptions = {
       buttons: [{
         text: 'Save',
         handler: () => console.log('Clicked Save!')
-      }, {
-        text: 'Log',
-        handler: () => {
+      },{
+          text: 'Log',
+          handler: () => {
           console.log('Clicked Log. Do not Dismiss.');
           return false;
-        }
-      }]
+          }
+        }]
     }
   }
 
-  }
+}
 
