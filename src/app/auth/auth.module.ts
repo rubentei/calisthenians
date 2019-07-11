@@ -6,12 +6,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { AuthPage } from './auth.page';
+import { LoginFormPage } from './login-form/login-form.page';
+import { RegisterFormPage } from './register-form/register-form.page';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: AuthPage
-  }
+{path: 'login-form', component: LoginFormPage},
+{path: 'register-form', component: RegisterFormPage}
 ];
 
 @NgModule({
@@ -21,6 +21,10 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AuthPage]
+  declarations: [
+    AuthPage,
+    LoginFormPage,
+    RegisterFormPage
+  ]
 })
 export class AuthPageModule {}

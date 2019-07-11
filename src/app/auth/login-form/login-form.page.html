@@ -1,8 +1,12 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Calisthenians</ion-title>
+    <ion-title>
+      <div class="logo">
+          <img src="../../../assets/img/logo.png"/>
+      </div>
+    </ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="register-form"></ion-back-button>
+      <ion-back-button defaultHref="auth/register-form"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -24,9 +28,5 @@
       <ion-button shape="round" fill="outline">Iniciar sesión</ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <br>
-  
-  No tengo cuenta aun<ion-button shape="round" fill="outline" href="register-form">registro</ion-button>
-  
 
 </ion-content>
