@@ -1,9 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      <div class="logo">
-          <img src="../../../assets/img/logo.png"/>
-      </div>
+        <ion-row>
+            <ion-col size="5" offset="3.2">
+              <img class="logo" src="../../../assets/img/logo.png"/>
+            </ion-col>
+          </ion-row>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -22,7 +24,7 @@
 
   <ion-item>
     <ion-label position="floating">Contraseña</ion-label>
-    <ion-input type ="password"></ion-input>
+    <ion-input type="password"></ion-input>
   </ion-item>
 
   <ion-toolbar>
@@ -31,6 +33,6 @@
     </ion-buttons>
   </ion-toolbar>
 
-   Ya tengo cuenta<ion-button shape="round" fill="outline" href="auth/login-form">Login</ion-button>
+  Ya tengo cuenta<ion-button shape="round" fill="outline" href="auth/login-form">Login</ion-button>
 
 </ion-content>

@@ -8,12 +8,8 @@ import { IonicModule } from '@ionic/angular';
 import { ProfilePage } from './profile.page';
 import { EventsListPage } from '../events-list/events-list.page';
 
-
 const routes: Routes = [
-  {
-    path: '',
-    component: ProfilePage
-  }
+  {path: 'event-list', component: EventsListPage},
 ];
 
 @NgModule({
