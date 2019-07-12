@@ -6,12 +6,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { ProfilePage } from './profile.page';
+import { EventsListPage } from '../events-list/events-list.page';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: ProfilePage
-  }
+  {path: 'event-list', component: EventsListPage},
 ];
 
 @NgModule({
@@ -21,6 +19,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ProfilePage]
+  declarations: [ProfilePage, EventsListPage]
 })
 export class ProfilePageModule {}
