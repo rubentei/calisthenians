@@ -1,9 +1,36 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>events</ion-title>
+    <ion-title>
+      <div class="logo">
+          <img src="../../../assets/img/logo.png"/>
+      </div>
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-card>
+    <ion-item>
+      <ion-icon name="pin" slot="start"></ion-icon>
+      <ion-label>Ficha del evento</ion-label>
+      <ion-button fill="outline" slot="end">info del evento</ion-button>
+    </ion-item>
+      
+    <ion-card-content>
+      descripcion breve del evento
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+ 
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button href="add-event" shape="round" fill="outline">Añadir Evento</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+
+  
