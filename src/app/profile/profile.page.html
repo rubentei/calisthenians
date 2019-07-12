@@ -1,14 +1,55 @@
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="style">
+</head>
+
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      <div class="logo">
-          <img src="../../../assets/img/logo.png"/>
-      </div>
-    </ion-title>
+  <ion-toolbar class="toolbar">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="1">
+          <div class="">
+            <ion-toolbar color="tertiary">
+              <ion-button class="back-button" fill="clear" size="small">
+                <h1>x</h1> </ion-button> 
+              </ion-toolbar> 
+            </div> 
+          </ion-col> 
+          <ion-col size="5" offset="2">
+              <img class="logo" src="../../../assets/img/logo.png" />
+          </ion-col>
+        <ion-col size="3">
+          <div class="">
+            <ion-title></ion-title>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
-  <h1>soy profile</h1>
-  <app-events-list></app-events-list>
+<h1>hola</h1>
+<ion-content class="background">
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4">
+        <div>
+          <img class="image" src="assets/img/Rich.png" />
+        </div>
+      </ion-col>
+      <ion-col size="4">
+        <div>
+          <div> Nombre:</div>
+          <div> Usuario:</div>
+          <div> Email:</div>
+        </div>
+      </ion-col>
+      <ion-col size="4">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <app-events-list></app-events-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

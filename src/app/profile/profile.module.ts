@@ -23,6 +23,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     EventsListPageModule
   ],
-  declarations: [ProfilePage]
+  declarations: [ProfilePage],
 })
 export class ProfilePageModule {}

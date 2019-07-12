@@ -1,0 +1,90 @@
+/*.bg-class{
+    --background: linear-gradient(197deg, rgba(255,220,150,34) 100%, rgba(255,255,222,49) 100%) !important;
+  }
+*/
+
+@font-face{
+    font-family: Slabo;
+    src : url('../../assets/fonts/slabo.woff2')
+}
+
+*{
+    font-family: Slabo;
+}
+
+.background{
+    --background: url(../../assets/img/bg.jpg) 0 0/100% 100% repeat;
+}
+
+.toolbar{
+    --background: rgb(209, 134, 14);
+}
+
+.title{
+    text-align: center;
+    width: 100%;
+    //margin-left: 5%;
+    margin-top: 5%;
+    --background:#FCF791;
+    border: 1px cornflowerblue;
+}
+
+.logo{
+    width: 100%;
+    padding-top: 7px;
+    margin-left: 2px;
+}
+
+.events{
+    height: 45% !important;
+    border: 1px solid black;
+
+}
+
+imgEventPark{
+    float: left;
+    width: 10% !important;
+    height: 10% !important;
+}
+
+txtEventPark{
+    height: 5% !important;
+    border: 1 pix solid black;
+    float: left;
+}
+
+// no queremos que haya color de fondo, esta es la clase
+.toolbar-background{
+    color: transparent;
+}
+
+.toolbar-container{
+    color: transparent;
+}
+
+.back-button{
+    background-color: rgba(0,0,0,0);
+    font-family: Arial; size: 14px; color: #FBDD4A;
+    font-weight: bold;
+}
+
+.image{
+    float: left;
+    //margin-left: 5%;
+    margin-top:5%;
+    height: 75px; 
+    width: 75px; 
+    border: 7px solid rgb(253, 241, 0);
+    border-radius: 50%;
+    box-shadow: 0 5 10px gray;
+    display: inline-block;
+    //margin-left: auto;
+    //margin-right: auto;
+}
+
+.datosUsuario{
+    float: left;
+    margin-left: 5%;
+    margin-top: 5%;
+    height: 55px; 
+}

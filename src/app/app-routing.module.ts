@@ -7,7 +7,6 @@ const routes: Routes = [
  { path: 'maps', loadChildren: './home/maps/maps.module#MapsPageModule' },
  { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
  { path: 'auth', loadChildren: './auth/auth.module#AuthPageModule' },
- { path: 'events-list', loadChildren: './events-list/events-list.module#EventsListPageModule' },
  { path: 'events', loadChildren: './events/events.module#EventsPageModule' },
  { path: 'add-event', loadChildren: './events/add-event/add-event.module#AddEventPageModule' },
  { path: 'event-card', loadChildren: './event-card/event-card.module#EventCardPageModule' },
@@ -15,7 +14,7 @@ const routes: Routes = [
 
 @NgModule({
  imports: [
-   RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+   RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
  ],
  exports: [RouterModule]
 })
