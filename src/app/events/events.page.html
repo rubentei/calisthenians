@@ -1,38 +1,20 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-        <ion-row>
-          <ion-col size="5" offset="2">
-            <img class="logo" src="../../../assets/img/logo.png"/>
-          </ion-col>
-        </ion-row>
+      <img class="logo" src="../../../assets/img/logoEscudo.png" />
     </ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card>
-    <ion-item>
-      <ion-icon name="pin" slot="start"></ion-icon>
-      <ion-label>Ficha del evento</ion-label>
-      <ion-button fill="outline" slot="end">info del evento</ion-button>
-    </ion-item>
-      
-    <ion-card-content>
-      descripcion breve del evento
-    </ion-card-content>
-  </ion-card>
+<ion-content padding>
+  <app-events-list></app-events-list>
 </ion-content>
- 
+
 <ion-footer>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button href="add-event" shape="round" fill="outline">Añadir Evento</ion-button>
-    </ion-buttons>
+    <ion-button class="addEventBtn" [routerLink]="['/add-event']" fill="solid">AÑADIR EVENTO</ion-button>
   </ion-toolbar>
 </ion-footer>
-
-  

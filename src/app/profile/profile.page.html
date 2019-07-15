@@ -1,55 +1,49 @@
-<head>
-  <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="style">
-</head>
-
 <ion-header>
-  <ion-toolbar class="toolbar">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="1">
-          <div class="">
-            <ion-toolbar color="tertiary">
-              <ion-button class="back-button" fill="clear" size="small">
-                <h1>x</h1> </ion-button> 
-              </ion-toolbar> 
-            </div> 
-          </ion-col> 
-          <ion-col size="5" offset="2">
-              <img class="logo" src="../../../assets/img/logo.png" />
-          </ion-col>
-        <ion-col size="3">
-          <div class="">
-            <ion-title></ion-title>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+  <ion-toolbar>
+    <ion-title>
+      <img class="logo" src="../../../assets/img/logoEscudo.png" />
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<h1>hola</h1>
-<ion-content class="background">
-  
+
+<ion-content padding>
   <ion-grid>
     <ion-row>
       <ion-col size="4">
-        <div>
-          <img class="image" src="assets/img/Rich.png" />
-        </div>
+        <ion-avatar>
+          <img class="img" src="assets/img/Rich.png" />
+        </ion-avatar>
       </ion-col>
-      <ion-col size="4">
-        <div>
-          <div> Nombre:</div>
-          <div> Usuario:</div>
-          <div> Email:</div>
-        </div>
-      </ion-col>
-      <ion-col size="4">
+      <ion-col size="8">
+        <ion-row>
+          <ion-col>
+            <p>Usuario:</p>
+          </ion-col>
+          <ion-col>
+            <p>{{user.user}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p>Email:</p>
+          </ion-col>
+          <ion-col>
+            <p>{{user.mail}}</p>
+          </ion-col>
+        </ion-row>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col>
-        <app-events-list></app-events-list>
+      <ion-col size="12">
+        <p>Descripción:</p>
+      </ion-col>
+      <ion-col size="12">
+        <p>{{user.description}}</p>
       </ion-col>
     </ion-row>
   </ion-grid>
+  <app-events-list></app-events-list>
 </ion-content>
