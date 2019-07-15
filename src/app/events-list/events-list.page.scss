@@ -3,31 +3,11 @@
   }
 */
 
-@font-face{
-    font-family: Slabo;
-    src : url('../../assets/fonts/slabo.woff2')
-}
-
-*{
-    font-family: Slabo;
-}
-
-.background{
-    --background: url(../../assets/img/bg.jpg) 0 0/100% 100% repeat;
-}
 
 .toolbar{
     --background: rgb(209, 134, 14);
 }
 
-.title{
-    text-align: center;
-    width: 100%;
-    //margin-left: 5%;
-    margin-top: 5%;
-    --background:#FCF791;
-    border: 1px cornflowerblue;
-}
 
 .events{
     height: 45% !important;
@@ -47,20 +27,12 @@ txtEventPark{
     float: left;
 }
 
-// no queremos que haya color de fondo, esta es la clase
-.toolbar-background{
-    color: transparent;
-}
 
 .toolbar-container{
     color: transparent;
 }
 
-.back-button{
-    background-color: rgba(0,0,0,0);
-    font-family: Arial; size: 14px; color: #FBDD4A;
-    font-weight: bold;
-}
+
 
 .image{
     float: left;
@@ -74,11 +46,4 @@ txtEventPark{
     display: inline-block;
     //margin-left: auto;
     //margin-right: auto;
-}
-
-.datosUsuario{
-    float: left;
-    margin-left: 5%;
-    margin-top: 5%;
-    height: 55px; 
 }
