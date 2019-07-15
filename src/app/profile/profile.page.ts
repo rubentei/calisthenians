@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MembersService } from '../members.service';
+import { User } from '../user'
 
 
 @Component({
@@ -10,11 +11,22 @@ import { MembersService } from '../members.service';
 
 export class ProfilePage implements OnInit {
 
+public user: User;
+public users: Array<User> = [];
+
+ 
 constructor(
-    public membersService: MembersService,
+    private membersService: MembersService,
   ) {
-//console.log(this.membersService.accessControl());
+
 }
   ngOnInit() {
+    this.getUser();
   }
+
+  public getUser(): User {
+    this.users = this.membersService.getUsers();
+    this.user = this.users[0];
+    return this.user;
+    };
 }

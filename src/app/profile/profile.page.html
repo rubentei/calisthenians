@@ -1,59 +1,49 @@
-
 <ion-header>
-  <ion-toolbar class="toolbar">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="2">
-          <div class="">
-            <ion-toolbar color="tertiary">
-              <ion-button ng-click="goBack()" fill="clear" size="small" class="ion-button">
-                <img src="../../../assets/img/backbutton.png"/>
-              </ion-button> 
-            </ion-toolbar> 
-          </div> 
-        </ion-col> 
-        <ion-col size="4" offset="1.9">
-            <img class="logo" src="../../../assets/img/logo.png" />
-        </ion-col>
-        <ion-col size="3">
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+  <ion-toolbar>
+    <ion-title>
+      <img class="logo" src="../../../assets/img/logoEscudo.png" />
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content class="background">
-  <ion-grid>
-    <ion-row>
-      <ion-col size="3">
-      </ion-col>
-      <ion-col size="6">
-          <ion-title style="text-align: center">Mi perfil</ion-title>
-      </ion-col>
-      <ion-col size="3">
-        </ion-col>
-    </ion-row>
-  </ion-grid>
 
+<ion-content padding>
   <ion-grid>
     <ion-row>
       <ion-col size="4">
-        <div>
-          <img class="memberImage" src="assets/img/Rich.png" />
-        </div>
+        <ion-avatar>
+          <img class="img" src="assets/img/Rich.png" />
+        </ion-avatar>
       </ion-col>
-      <ion-col size="4">
-        <div class="memberData">
-          <div> Usuario o email:</div>
-          <div> Contraseña:</div>
-        </div>
-      </ion-col>
-      <ion-col size="4">
+      <ion-col size="8">
+        <ion-row>
+          <ion-col>
+            <p>Usuario:</p>
+          </ion-col>
+          <ion-col>
+            <p>{{user.user}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p>Email:</p>
+          </ion-col>
+          <ion-col>
+            <p>{{user.mail}}</p>
+          </ion-col>
+        </ion-row>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col>
-        <app-events-list></app-events-list>
+      <ion-col size="12">
+        <p>Descripción:</p>
+      </ion-col>
+      <ion-col size="12">
+        <p>{{user.description}}</p>
       </ion-col>
     </ion-row>
   </ion-grid>
+  <app-events-list></app-events-list>
 </ion-content>

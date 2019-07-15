@@ -1,16 +1,12 @@
 <ion-header>
   <ion-toolbar class="toolbar>
     <ion-title>
-        <ion-row>
-            <ion-col size="5" offset="3.2">
-              <img class="logo" src="../../../assets/img/logo.png"/>
-            </ion-col>
-          </ion-row>
+      <img class="logo" src="../../../assets/img/logoEscudo.png" />
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="background">
+<ion-content padding>
 
   <ion-item>
     <ion-label position="floating">Nombre del usuario</ion-label>
@@ -27,12 +23,12 @@
     <ion-input type="password"></ion-input>
   </ion-item>
 
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button shape="round" fill="outline">Registrarme</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
 
-  Ya tengo cuenta<ion-button shape="round" fill="outline" href="auth/login-form">Login</ion-button>
+
+  <ion-button [routerLink]="['/home']" shape="round" fill="outline">Registrarme</ion-button>
+
+
+  <p>Ya tengo cuenta</p>
+  <ion-button [routerLink]="['/auth/login-form']" shape="round">LOGIN</ion-button>
 
 </ion-content>
