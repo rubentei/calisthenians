@@ -1,14 +1,35 @@
-<ion-content>
-<h2>EVENTOS</h2>
-  <ion-list>
-    <ion-item *ngFor="let event of eventList">
-      <ion-thumbnail item-start>
-        <img src="assets/img/parque.png">
-      </ion-thumbnail>
-      <h2>{{event.creator}}</h2>
-      <p>{{event.date | date}}</p>
-      <button ion-button clear item-end>Detalles</button>
-  </ion-item>
+<ion-content class="background transparent">
+  <h2 class="title">EVENTOS</h2>
+  <ion-list class="list transparent">
+    <ion-item *ngFor="let event of eventList" class="item">
+      <div class="transparent">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-align-self-center">
+            <ion-thumbnail item-start class="thumbnail">
+              <img src="assets/img/parque.png">
+            </ion-thumbnail>
+          </ion-col>
+          <ion-col class="ion-align-self-center">
+            <h2>{{event.creator}}</h2>
+          </ion-col>
+          <ion-col class="ion-align-self-center">
+            <ion-row>
+              <ion-col size="12" class="hour ion-align-self-center">
+                <p>{{event.date | date: 'HH:mm' }}</p>
+              </ion-col >
+              <ion-col size="12" class="date ion-align-self-center">
+                <p>{{event.date | date: 'dd MMM yyy'}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-col >
+          <ion-col size="3" class="ion-align-self-center">
+            <button class="detailButton" ion-button clear item-end>Detalles</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    </ion-item>
   </ion-list>
 
 </ion-content>
