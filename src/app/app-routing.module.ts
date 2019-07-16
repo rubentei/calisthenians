@@ -8,14 +8,13 @@ const routes: Routes = [
  { path: 'auth', loadChildren: './auth/auth.module#AuthPageModule' },
  { path: 'events', loadChildren: './events/events.module#EventsPageModule' },
  { path: 'add-event', loadChildren: './events/add-event/add-event.module#AddEventPageModule' },
- { path: 'event-card', loadChildren: './event-card/event-card.module#EventCardPageModule' },  { path: 'test-event-list', loadChildren: './test-event-list/test-event-list.module#TestEventListPageModule' },
-
+ { path: 'event-card', loadChildren: './event-card/event-card.module#EventCardPageModule' },
 ];
 
-@NgModule({
- imports: [
-   RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
- ],
- exports: [RouterModule]
-})
-export class AppRoutingModule { }
+@NgModule ({
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+  ],
+  exports: [RouterModule]
+ })
+ export class AppRoutingModule { }
