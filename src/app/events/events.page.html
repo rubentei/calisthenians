@@ -1,5 +1,5 @@
-<ion-header>
-  <ion-toolbar class="toolbar">
+<ion-header class="color-header">
+  <ion-toolbar>
     <ion-title>
       <img class="logo" src="../../../assets/img/logoEscudo.png" />
     </ion-title>
@@ -10,12 +10,13 @@
 
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="background">
   <app-events-list></app-events-list>
 </ion-content>
 
-<ion-footer>
-  <ion-toolbar>
-    <ion-button class="addEventBtn" [routerLink]="['/add-event']" fill="solid">AÑADIR EVENTO</ion-button>
+<ion-footer style="background-color: danger;">
+  <ion-toolbar color="secondary">
+    <ion-button class="addEventBtn" [routerLink]="['/add-event']" fill="solid" color="secondary-contrast">AÑADIR EVENTO</ion-button>
   </ion-toolbar>
 </ion-footer>
+
