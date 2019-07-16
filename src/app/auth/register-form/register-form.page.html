@@ -25,10 +25,13 @@
 
 
 
-  <ion-button [routerLink]="['/home']" shape="round" fill="outline">Registrarme</ion-button>
-
-
-  <p>Ya tengo cuenta</p>
-  <ion-button [routerLink]="['/auth/login-form']" shape="round">LOGIN</ion-button>
-
+  <ion-button [routerLink]="['/home']" expand="block" fill="solid">REGISTRARME</ion-button>
+  <ion-row class="alreadyRegistered">
+    <ion-col size="5" offset="3">
+      <p class="text">Ya tengo cuenta</p>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button [routerLink]="['/auth/login-form']" shape="round" size="small">LOGIN</ion-button>
+    </ion-col>
+  </ion-row>
 </ion-content>
