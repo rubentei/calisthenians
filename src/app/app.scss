@@ -5,7 +5,43 @@
 // file can hold Sass mixins, functions, and placeholder classes to be imported 
 // and used throughout the application.
 
+
+@font-face{
+    font-family: Slabo;
+    src : url('../assets/fonts/slabo.woff2')
+}
+
+
+*{
+    font-family: Slabo;
+}
+
+.background{
+    --background: url('../assets/img/bg.jpg') 0 0/100% 100% repeat;
+}
+
+.toolbar{
+    --background: rgb(209, 134, 14);
+}
+
+.back-button{
+    width: 25% !important;
+}
+
+
 .logo{
     width: 37px;
     height: 37px;
 }
+<<<<<<< HEAD
+=======
+
+.width-button{
+    --background: rgb(251, 221, 74);
+    
+}
+
+.header-color{
+    --background: #DC9521;
+}
+>>>>>>> 311a56ca5b0e664769189167b9cc7e8cf46725a4

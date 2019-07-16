@@ -11,10 +11,10 @@ const routes: Routes = [
  { path: 'event-card', loadChildren: './event-card/event-card.module#EventCardPageModule' },
 ];
 
-@NgModule({
- imports: [
-   RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
- ],
- exports: [RouterModule]
-})
-export class AppRoutingModule { }
+@NgModule ({
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+  ],
+  exports: [RouterModule]
+ })
+ export class AppRoutingModule { }
