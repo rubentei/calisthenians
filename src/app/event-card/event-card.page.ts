@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventsService } from '../events.service';
 
 @Component({
   selector: 'app-event-card',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventCardPage implements OnInit {
 
-  constructor() { }
+  results: Array<any>
+
+  constructor(private EventsService: EventsService) { }
 
   ngOnInit() {
+  }
+
+  gettingEvent(){
+    this.results = this.EventsService.getEvents(this.results);
   }
 
 }

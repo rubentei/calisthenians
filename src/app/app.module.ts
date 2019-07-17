@@ -16,11 +16,13 @@ import { MapsPageModule } from './home/maps/maps.module';
 import { User } from './user';
 import { EventItem } from './event-item';
 
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, MapsPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, MapsPageModule, HttpClientModule],
   providers: [
     StatusBar,
     SplashScreen,

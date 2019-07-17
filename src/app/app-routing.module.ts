@@ -9,6 +9,7 @@ const routes: Routes = [
  { path: 'events', loadChildren: './events/events.module#EventsPageModule' },
  { path: 'add-event', loadChildren: './events/add-event/add-event.module#AddEventPageModule' },
  { path: 'event-card', loadChildren: './event-card/event-card.module#EventCardPageModule' },
+ { path: 'event/:id', loadChildren: './event-card/event-card.module#EventCardPageModule' },
 ];
 
 @NgModule ({

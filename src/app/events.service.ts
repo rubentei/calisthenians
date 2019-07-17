@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { EventItem } from './event-item';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventsService {
+
+  url = '';
+  apiKey = ''; // <-- Enter your own key here!
 
 private events: Array<EventItem> = [{
   id: '1',
@@ -29,9 +33,9 @@ private events: Array<EventItem> = [{
 }];
 
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  public getEvents(): Array<EventItem> {
-    return this.events;
+  public getEvents(id): Array<EventItem> {
+    return this.http.get(`${this.url}?i=${id}&plot=full&apikey=${this.apiKey}`); // aqui va la url
   }
 }
