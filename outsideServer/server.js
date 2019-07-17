@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express(); // create our app w/ express
 var mongoose = require('mongoose'); // mongoose for mongodb
+var ObjectId = mongoose.Schema.Types.ObjectId;
 var morgan = require('morgan'); // log requests to the console (express4)
 var bodyParser = require('body-parser'); // pull information from HTML POST (express4)
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
@@ -14,9 +15,6 @@ app.use(bodyParser.urlencoded({
   'extended': 'true'
 })); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // parse application/json
-app.use(bodyParser.json({
-  type: 'application/vnd.api+json'
-})); // parse application/vnd.api+json as json
 app.use(methodOverride());
 app.use(cors());
 
@@ -36,14 +34,14 @@ db.once('open', function () {
 //MODELS
 
 var place_model = mongoose.model('Place', {
-  id: String,
+  id: ObjectId,
   longitude: Number,
   latitude: Number,
   name: String
 });
 
 var user_model = mongoose.model('User', {
-  id: String,
+  id: ObjectId,
   user: String,
   mail: String,
   password: String,
@@ -51,12 +49,12 @@ var user_model = mongoose.model('User', {
 });
 
 var event_model = mongoose.model('Event', {
-  id: String,
+  id: ObjectId,
   date: Date,
-  placeId: String,
+  placeId: ObjectId,
   description: String,
-  members: [String],
-  creator: String
+  members: [ObjectId],
+  creator: ObjectId
 });
 
 
@@ -67,10 +65,9 @@ var event_model = mongoose.model('Event', {
 
 app.get("/event/past/:userid", async (req, res) => {
   try {
-    var id = req.params.userid;
-    var query = await Movie.findById({
-      "creator": id
-    });
+    var id = mongoose.Types.ObjectId(req.params.userid);
+    console.log(id);
+    var query = await event_model.find({"creator": id});
     res.send(query);
   } catch (error) {
     res.status(500).send(error);
