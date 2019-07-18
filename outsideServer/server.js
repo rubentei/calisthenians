@@ -74,13 +74,20 @@ app.get("/event/past/:userid", async (req, res) => {
   }
 });
 
+
 //GET  /EVENTS/:EVENTID/USERS Ruben
 //POST /USERS/REGISTER Ric
 //POST /USERS/LOGIN  Ric 
 //GET  /EVENT/:EVENTID Arya
+app.get('/event/:eventid', async (req, res) => {
+  const id = mongoose.Types.ObjectId(req.params.eventid);
+  console.log(id);
+  const result = await db.collection('events').find({"_id": id}).toArray();
+   res.send(result)
+});
 //GET  /EVENT/NEXT Arya
 //POST /EVENT Arya
 //PUT  /USERS/:USERID Ric 
 
-app.listen(8080);
-console.log("App listening on port 8080");
+app.listen(3000);
+console.log("App listening on port 3000");
