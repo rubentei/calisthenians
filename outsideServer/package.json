@@ -19,5 +19,8 @@
     "mongoose": "^4.13.18",
     "morgan": "^1.7.0",
     "superlogin": "^0.6.1"
+  },
+  "dependencies": {
+    "nodemon": "^1.19.1"
   }
 }
