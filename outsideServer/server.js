@@ -31,7 +31,7 @@ db.once('open', function () {
   console.log('Connection succesful');
 });
 
-
+db.collection('places').createIndex({'location':"2dsphere"});
 
 //MODELS
 
@@ -64,50 +64,22 @@ var event_model = mongoose.model('Event', {
 
 //GET  /PLACES Ruben
 
-// app.get("/places/:lat/:lng", async (req, res) => {
-//   try {
-//     var lat = req.params.lat;
-//     var lng = req.params.lng;
-
-//     console.log(lat, lng);
-//     var query = await place_model.aggregate({
-//       $geoNear: {
-//         near: {
-//           type: "Point",
-//           coordinates: [lng, lat]
-//         },
-//         distanceField: "dist.calculated",
-//         maxDistance: 2000,
-//         query: {
-//           type: "public"
-//         },
-//         includeLocs: "dist.location",
-//       }
-//     });
-//     res.send(query);
-//   } catch (error) {
-//     res.status(500).send(error);
-//   }
-// });
-
-// app.get('/places/:lng/:lat', async (req, res) => {
-//   const lat = req.params.lat;
-//   const lng = req.params.lng;
-//   const result = await db.collection('places').find({
-//     {
-//       location : {
-//         $near : {
-//           $geometry : { 
-//             type : "Point" , 
-//             coordinates : [lng, lat]  
-//           }, 
-//           $maxDistance : 20000
-//         }
-//       }
-//     }
-//   }).toArray();
-//   res.send(result)
-// });
+app.get('/places/:lng/:lat', async (req, res) => {
+  const lat = parseFloat(req.params.lat);
+  const lng = parseFloat(req.params.lng);
+  const result = await db.collection('places').find({
+    location: {
+      $near: {
+        $geometry: {
+          type: "Point",
+          coordinates: [lng,lat]
+        },
+        $maxDistance: 15000
+      }
+    }
+  }).toArray();
+  res.send(result)
+});
 
 //GET  /EVENT/PAST/:USERID Ruben
 
