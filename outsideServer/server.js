@@ -63,8 +63,57 @@ var event_model = mongoose.model('Event', {
 //END Points
 
 //GET  /PLACES Ruben
+
+app.get('/places/:lng/:lat', async (req, res) => {
+  const lat = parseFloat(req.params.lat);
+  const lng = parseFloat(req.params.lng);
+  const result = await db.collection('places').find({
+    location: {
+      $near: {
+        $geometry: {
+          type: "Point",
+          coordinates: [lng,lat]
+        },
+        $maxDistance: 15000
+      }
+    }
+  }).toArray();
+  res.send(result)
+});
+
 //GET  /EVENT/PAST/:USERID Ruben
+
+app.get('/events/past/:userid', async (req, res) => {
+  const id = mongoose.Types.ObjectId(req.params.userid);
+  const result = await db.collection('events').find({
+    $and: [{
+      "creator": id
+    }, {
+      "date": {
+        $lte: new Date()
+      }
+    }]
+  }).toArray();
+  res.send(result)
+});
+
 //GET  /EVENTS/:EVENTID/USERS Ruben
+
+app.get('/event/:eventid/users', async (req, res) => {
+  const id = mongoose.Types.ObjectId(req.params.eventid);
+  const result = await db.collection('events').find({
+    "_id": id
+  }).toArray();
+  var members = result[0].members;
+  var membersResult = [];
+  for (let member of members) {
+    const obtained = await db.collection('users').find({
+      "_id": member
+    }).toArray();
+    membersResult.push(obtained[0]);
+  };
+  res.send(membersResult);
+});
 //POST /USERS/REGISTER Ric
 //POST /USERS/LOGIN  Ric 
 
