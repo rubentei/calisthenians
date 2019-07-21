@@ -1,11 +1,12 @@
-var express = require('express');
-var app = express(); // create our app w/ express
-var mongoose = require('mongoose'); // mongoose for mongodb
-var ObjectId = mongoose.Schema.Types.ObjectId;
-var morgan = require('morgan'); // log requests to the console (express4)
-var bodyParser = require('body-parser'); // pull information from HTML POST (express4)
-var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
-var cors = require('cors');
+const express = require('express');
+const app = express(); // create our app w/ express
+const mongoose = require('mongoose'); // mongoose for mongodb
+const ObjectId = mongoose.Schema.Types.ObjectId;
+const morgan = require('morgan'); // log requests to the console (express4)
+const bodyParser = require('body-parser'); // pull information from HTML POST (express4)
+const methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
+const cors = require('cors');
+const bcrypt = require('bcrypt');
 
 
 mongoose.connect('mongodb://localhost:27017/calisthenians');
@@ -25,7 +26,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-var db = mongoose.connection;
+const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
   console.log('Connection succesful');
@@ -37,14 +38,14 @@ db.collection('places').createIndex({
 
 //MODELS
 
-var place_model = mongoose.model('Place', {
+const place_model = mongoose.model('Place', {
   id: ObjectId,
   longitude: Number,
   latitude: Number,
   name: String
 });
 
-var user_model = mongoose.model('User', {
+const user_model = mongoose.model('User', {
   id: ObjectId,
   user: String,
   mail: String,
@@ -52,7 +53,7 @@ var user_model = mongoose.model('User', {
   description: String
 });
 
-var event_model = mongoose.model('Event', {
+const event_model = mongoose.model('Event', {
   id: ObjectId,
   date: Date,
   placeId: ObjectId,
@@ -106,7 +107,7 @@ app.get('/event/:eventid/users', async (req, res) => {
   const result = await db.collection('events').find({
     "_id": id
   }).toArray();
-  var members = result[0].members;
+  const members = result[0].members;
   var membersResult = [];
   for (let member of members) {
     const obtained = await db.collection('users').find({
@@ -118,25 +119,38 @@ app.get('/event/:eventid/users', async (req, res) => {
 });
 //POST /USERS/REGISTER Ric
 app.post('/users/register', async (req, res) => {
-  const user = new user_model({
-    user: req.body.user,
-    mail: req.body.mail,
-    password: req.body.password,
-    description: ''
+  const saltRounds = 10;
+  const myPlaintextPassword = req.body.password;
+  await bcrypt.hash(myPlaintextPassword, saltRounds, function (err, hash) {
+    const user = new user_model({
+      user: req.body.user,
+      mail: req.body.mail,
+      password: hash,
+      description: ''
+    });
+    user.save();
+    res.send({
+      "ok": true
+    });
   });
- await user.save();
- res.send({"ok": true});
- });
+});
 
 //POST /USERS/LOGIN  Ric 
 app.post('/users/login', async (req, res) => {
   const user = new user_model(req.body);
-  var result = await db.collection('users').findOne({"user": user.user});
-  if(user.password === result.password){
-    res.send({"auth": true});
-  } else {
-    res.send({"auth": false});
-  }
+  const result = await db.collection('users').findOne({
+    "user": user.user
+  });
+  const myPlaintextPassword = req.body.password;
+  const hash = result.password;
+
+  bcrypt.compare(myPlaintextPassword, hash).then(function (response) {
+    return response;
+  }).then(function (response) {
+    res.send({
+      "auth": response
+    });
+  })
 });
 
 //GET  /EVENT/:EVENTID Arya
@@ -151,7 +165,6 @@ app.get('/event/:eventid', async (req, res) => {
 //GET  /EVENT/NEXT Arya
 app.get('/events/next', async (req, res) => {
   const dateNow = new Date();
-  console.log(dateNow);
   const result = await db.collection('events').find({
     "date": {
       $gte: dateNow
@@ -163,7 +176,7 @@ app.get('/events/next', async (req, res) => {
 //POST /EVENT Arya
 app.post('/event', async (req, res) => {
   const event = new event_model(req.body);
-  var result = await db.collection('events').save(event);
+  const result = await db.collection('events').save(event);
   res.send(result);
 });
 
@@ -171,9 +184,15 @@ app.post('/event', async (req, res) => {
 //PUT  /USERS/:USERID Ric 
 app.put('/users/:userid', async (req, res) => {
   const id = mongoose.Types.ObjectId(req.params.userid);
-  const query = {'_id': id};
+  const query = {
+    '_id': id
+  };
   const description = req.body.description;
-  const result = await db.collection('users').findOneAndUpdate(query, {$set: {"description": description}});
+  const result = await db.collection('users').findOneAndUpdate(query, {
+    $set: {
+      "description": description
+    }
+  });
   res.send(result);
 });
 
