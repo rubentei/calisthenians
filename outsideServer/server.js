@@ -31,7 +31,9 @@ db.once('open', function () {
   console.log('Connection succesful');
 });
 
-db.collection('places').createIndex({'location':"2dsphere"});
+db.collection('places').createIndex({
+  'location': "2dsphere"
+});
 
 //MODELS
 
@@ -72,7 +74,7 @@ app.get('/places/:lng/:lat', async (req, res) => {
       $near: {
         $geometry: {
           type: "Point",
-          coordinates: [lng,lat]
+          coordinates: [lng, lat]
         },
         $maxDistance: 15000
       }
@@ -115,12 +117,34 @@ app.get('/event/:eventid/users', async (req, res) => {
   res.send(membersResult);
 });
 //POST /USERS/REGISTER Ric
+app.post('/users/register', async (req, res) => {
+  const user = new user_model({
+    user: req.body.user,
+    mail: req.body.mail,
+    password: req.body.password,
+    description: ''
+  });
+ await user.save();
+ res.send({"ok": true});
+ });
+
 //POST /USERS/LOGIN  Ric 
+app.post('/users/login', async (req, res) => {
+  const user = new user_model(req.body);
+  var result = await db.collection('users').findOne({"user": user.user});
+  if(user.password === result.password){
+    res.send({"auth": true});
+  } else {
+    res.send({"auth": false});
+  }
+});
 
 //GET  /EVENT/:EVENTID Arya
 app.get('/event/:eventid', async (req, res) => {
   const id = mongoose.Types.ObjectId(req.params.eventid);
-  const result = await db.collection('events').find({"_id": id}).toArray();
+  const result = await db.collection('events').find({
+    "_id": id
+  }).toArray();
   res.send(result);
 });
 
@@ -128,8 +152,12 @@ app.get('/event/:eventid', async (req, res) => {
 app.get('/events/next', async (req, res) => {
   const dateNow = new Date();
   console.log(dateNow);
-  const result = await db.collection('events').find({"date":{ $gte: dateNow}}).toArray();
-  res.send(result);                                  
+  const result = await db.collection('events').find({
+    "date": {
+      $gte: dateNow
+    }
+  }).toArray();
+  res.send(result);
 });
 
 //POST /EVENT Arya
@@ -141,6 +169,13 @@ app.post('/event', async (req, res) => {
 
 
 //PUT  /USERS/:USERID Ric 
+app.put('/users/:userid', async (req, res) => {
+  const id = mongoose.Types.ObjectId(req.params.userid);
+  const query = {'_id': id};
+  const description = req.body.description;
+  const result = await db.collection('users').findOneAndUpdate(query, {$set: {"description": description}});
+  res.send(result);
+});
 
 app.listen(3000);
 console.log("App listening on port 3000");
