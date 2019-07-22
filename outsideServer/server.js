@@ -1,12 +1,13 @@
 const express = require('express');
-const app = express(); // create our app w/ express
-const mongoose = require('mongoose'); // mongoose for mongodb
-const ObjectId = mongoose.Schema.Types.ObjectId;
-const morgan = require('morgan'); // log requests to the console (express4)
-const bodyParser = require('body-parser'); // pull information from HTML POST (express4)
-const methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
+const app = express();
+const mongoose = require('mongoose');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
+const users = require('./users');
+const events = require('./events');
+const places = require('./places');
 
 
 mongoose.connect('mongodb://localhost:27017/calisthenians');
@@ -16,7 +17,6 @@ app.use(bodyParser.urlencoded({
   'extended': 'true'
 })); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // parse application/json
-app.use(methodOverride());
 app.use(cors());
 
 app.use(function (req, res, next) {
@@ -36,37 +36,19 @@ db.collection('places').createIndex({
   'location': "2dsphere"
 });
 
-//MODELS
-
-const place_model = mongoose.model('Place', {
-  id: ObjectId,
-  longitude: Number,
-  latitude: Number,
-  name: String
-});
-
-const user_model = mongoose.model('User', {
-  id: ObjectId,
-  user: String,
-  mail: String,
-  password: String,
-  description: String
-});
-
-const event_model = mongoose.model('Event', {
-  id: ObjectId,
-  date: Date,
-  placeId: ObjectId,
-  description: String,
-  members: [ObjectId],
-  creator: ObjectId
-});
-
 
 //END Points
 
-//GET  /PLACES Ruben
+//POST /PLACES
+app.post('/places', async (req, res) => {
+  const newPlace = new places.place_model(req.body);
+  console.log(new places.place_model(newPlace));
+  const result = await db.collection('places').save(newPlace);
+  res.send(result);
+});
 
+
+//GET  /PLACES (CHECKED)
 app.get('/places/:lng/:lat', async (req, res) => {
   const lat = parseFloat(req.params.lat);
   const lng = parseFloat(req.params.lng);
@@ -84,10 +66,10 @@ app.get('/places/:lng/:lat', async (req, res) => {
   res.send(result)
 });
 
-//GET  /EVENT/PAST/:USERID Ruben
-
+//GET  /EVENTS/PAST/:USERID (CHECKED)
 app.get('/events/past/:userid', async (req, res) => {
   const id = mongoose.Types.ObjectId(req.params.userid);
+  console.log(id);
   const result = await db.collection('events').find({
     $and: [{
       "creator": id
@@ -100,8 +82,7 @@ app.get('/events/past/:userid', async (req, res) => {
   res.send(result)
 });
 
-//GET  /EVENTS/:EVENTID/USERS Ruben
-
+//GET  /EVENT/:EVENTID/USERS (CHECKED)
 app.get('/event/:eventid/users', async (req, res) => {
   const id = mongoose.Types.ObjectId(req.params.eventid);
   const result = await db.collection('events').find({
@@ -117,12 +98,13 @@ app.get('/event/:eventid/users', async (req, res) => {
   };
   res.send(membersResult);
 });
-//POST /USERS/REGISTER Ric
+
+//POST /USERS/REGISTER (CHECKED)
 app.post('/users/register', async (req, res) => {
   const saltRounds = 10;
   const myPlaintextPassword = req.body.password;
   await bcrypt.hash(myPlaintextPassword, saltRounds, function (err, hash) {
-    const user = new user_model({
+    const user = new users.user_model({
       user: req.body.user,
       mail: req.body.mail,
       password: hash,
@@ -135,9 +117,9 @@ app.post('/users/register', async (req, res) => {
   });
 });
 
-//POST /USERS/LOGIN  Ric 
-app.post('/users/login', async (req, res) => {
-  const user = new user_model(req.body);
+//POST /USERS/LOGIN  (CHECKED)
+app.post('/users/login', async (req, res) => { 
+  const user = new users.user_model(req.body);
   const result = await db.collection('users').findOne({
     "user": user.user
   });
@@ -153,7 +135,7 @@ app.post('/users/login', async (req, res) => {
   })
 });
 
-//GET  /EVENT/:EVENTID Arya
+//GET  /EVENT/:EVENTID (CHECKED)
 app.get('/event/:eventid', async (req, res) => {
   const id = mongoose.Types.ObjectId(req.params.eventid);
   const result = await db.collection('events').find({
@@ -162,7 +144,7 @@ app.get('/event/:eventid', async (req, res) => {
   res.send(result);
 });
 
-//GET  /EVENT/NEXT Arya
+//GET  /EVENTS/NEXT (CHECKED)
 app.get('/events/next', async (req, res) => {
   const dateNow = new Date();
   const result = await db.collection('events').find({
@@ -173,15 +155,15 @@ app.get('/events/next', async (req, res) => {
   res.send(result);
 });
 
-//POST /EVENT Arya
+//POST /EVENT (CHECKED)
 app.post('/event', async (req, res) => {
-  const event = new event_model(req.body);
+  const event = new events.event_model(req.body);
   const result = await db.collection('events').save(event);
   res.send(result);
 });
 
 
-//PUT  /USERS/:USERID Ric 
+//PUT  /USERS/:USERID (CHECKED)
 app.put('/users/:userid', async (req, res) => {
   const id = mongoose.Types.ObjectId(req.params.userid);
   const query = {
@@ -193,7 +175,7 @@ app.put('/users/:userid', async (req, res) => {
       "description": description
     }
   });
-  res.send(result);
+  res.send({"ok": true});
 });
 
 app.listen(3000);
