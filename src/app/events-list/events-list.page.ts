@@ -20,7 +20,7 @@ export class EventsListPage implements OnInit {
   }
 
   public getEventList() {
-    return this.eventList = this.eventsService.getEvents();
+    // return this.eventList = this.eventsService.getEvents();
   }
 
 }

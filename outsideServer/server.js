@@ -39,7 +39,7 @@ db.collection('places').createIndex({
 
 //END Points
 
-//POST /PLACES
+//POST /PLACES (CHECKED)
 app.post('/places', async (req, res) => {
   const newPlace = new places.place_model(req.body);
   console.log(new places.place_model(newPlace));

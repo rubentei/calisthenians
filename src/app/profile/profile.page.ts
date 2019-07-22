@@ -11,8 +11,8 @@ import { User } from '../user'
 
 export class ProfilePage implements OnInit {
 
-public user: User;
-public users: Array<User> = [];
+private user: User;
+private users: Array<User> = [];
 
  
 constructor(
@@ -25,8 +25,7 @@ constructor(
   }
 
   public getUser(): User {
-    this.users = this.membersService.getUsers();
-    this.user = this.users[0];
+    this.membersService.getUser();
     return this.user;
     };
 }

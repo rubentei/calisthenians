@@ -14,15 +14,13 @@
   <div class="login">
     <ion-item>
       <ion-label position="floating">Nombre del usuario</ion-label>
-      <ion-input></ion-input>
+      <ion-input #userName></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-input #userPassword type="password"></ion-input>
     </ion-item>
-    <ion-button [routerLink]="['/home']" expand="block" fill="solid">INICIAR SESIÓN</ion-button>
-
+    <ion-button (click)="userLogin(userName.value, userPassword.value)" expand="block" fill="solid">INICIAR SESIÓN</ion-button>
   </div>
-
 
 </ion-content>

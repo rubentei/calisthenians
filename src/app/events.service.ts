@@ -35,7 +35,7 @@ private events: Array<EventItem> = [{
 
   constructor(private http: HttpClient) { }
 
-  public getEvents(id): Array<EventItem> {
-    return this.http.get(`${this.url}?i=${id}&plot=full&apikey=${this.apiKey}`); // aqui va la url
-  }
+  // public getEvents(id): Array<EventItem> {
+  //   // return this.http.get(`${this.url}?i=${id}&plot=full&apikey=${this.apiKey}`); // aqui va la url
+  // }
 }

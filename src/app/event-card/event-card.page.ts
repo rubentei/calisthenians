@@ -16,7 +16,7 @@ export class EventCardPage implements OnInit {
   }
 
   gettingEvent(){
-    this.results = this.EventsService.getEvents(this.results);
+    // this.results = this.EventsService.getEvents(this.results);
   }
 
 }

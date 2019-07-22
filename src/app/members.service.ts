@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { User } from './user';
 
 @Injectable({
@@ -6,40 +7,23 @@ import { User } from './user';
 })
 export class MembersService {
 
-  private users: Array<User> = [{
-    id: '1',
-    user: 'user_1',
-    mail: 'user@usermail.com',
-    password: 'xxxyyy',
-    description: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
-  },
-  {
-    id: '2',
-    user: 'user_2',
-    mail: 'user2@usermail.com',
-    password: 'xxxyyy',
-    description: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
-  },
-  {
-    id: '3',
-    user: 'user_3',
-    mail: 'user3@usermail.com',
-    password: 'xxxyyy',
-    description: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
-  },
-  {
-    id: '4',
-    user: 'user_4',
-    mail: 'user4@usermail.com',
-    password: 'xxxyyy',
-    description: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
-  }];
+  private auth: Boolean = false;
+  private users: Array<User> = [];
+  private singleUser: User;
 
 
-  constructor(private user: User) { }
+  constructor(private user: User, private http: HttpClient) { }
 
 
   public getUsers(): Array<User> {
     return this.users;
+  }
+
+  public getUser(): void {
+    const userId = '5d345e25654b743ce00d93d3';
+    this.http.get(`http://localhost:3000/users/${userId}`).subscribe((response) => {
+      console.log(response);
+    });
+    // return this.singleUser;
   }
 }

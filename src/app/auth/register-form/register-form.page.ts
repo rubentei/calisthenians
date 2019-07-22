@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-form',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterFormPage implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
 
+  public async userRegister(userName, userEmail, userPassword){
+    const request = await this.authService.userRegister(userName, userEmail, userPassword);
+  }
 }
