@@ -73,17 +73,7 @@ export class MapsPage implements OnInit {
         marker.showInfoWindow();
       });
 
-      this.getMarkers();
-
-      this.map.on(GoogleMapsEvent.MAP_CLICK).subscribe((params: any[]) => {
-        let latLng = params[0];
-    
-        this.map.addMarkerSync({
-          position: latLng,
-          title: latLng,
-          animation: GoogleMapsAnimation.DROP
-        });
-      });    
+      this.getMarkers();  
     })
       .catch(err => {
         this.showToast(err.error_message);
