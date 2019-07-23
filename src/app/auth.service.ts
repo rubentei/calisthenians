@@ -26,7 +26,6 @@ export class AuthService {
       email: email,
       password: password
     }).toPromise();
-    console.log("auth", auth);
     return auth;
   }
 }

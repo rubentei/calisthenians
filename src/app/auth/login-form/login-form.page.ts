@@ -20,6 +20,6 @@ export class LoginFormPage implements OnInit {
     auth = request;
     if (auth.auth === true) {
       this.router.navigate(['/home']);
-    }
+    };
   };
 }

@@ -106,13 +106,13 @@ app.post('/users/register', async (req, res) => {
   await bcrypt.hash(myPlaintextPassword, saltRounds, function (err, hash) {
     const user = new users.user_model({
       user: req.body.user,
-      mail: req.body.mail,
+      mail: req.body.email,
       password: hash,
       description: ''
     });
     user.save();
     res.send({
-      "ok": true
+      "auth": true
     });
   });
 });

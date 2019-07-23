@@ -3,20 +3,20 @@
   <ion-img class="bigLogo" src="../../../assets/img/logo.png"></ion-img>
   <ion-item>
     <ion-label position="floating">Nombre del usuario</ion-label>
-    <ion-input></ion-input>
+    <ion-input #userName></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="floating">Email</ion-label>
-    <ion-input></ion-input>
+    <ion-input #userEmail></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="floating">Contraseña</ion-label>
-    <ion-input type="password"></ion-input>
+    <ion-input #userPassword type="password"></ion-input>
   </ion-item>
 
-  <ion-button [routerLink]="['/home']" expand="block" fill="solid">REGISTRARME</ion-button>
+  <ion-button (click)="userRegister(userName.value, userEmail.value, userPassword.value)" expand="block" fill="solid">REGISTRARME</ion-button>
   
   <ion-row class="alreadyRegistered">
     <ion-col size="8" offset="3">

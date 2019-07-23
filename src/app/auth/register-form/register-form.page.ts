@@ -15,6 +15,11 @@ export class RegisterFormPage implements OnInit {
   }
 
   public async userRegister(userName, userEmail, userPassword){
+    var auth;
     const request = await this.authService.userRegister(userName, userEmail, userPassword);
-  }
+    auth = request;
+    if (auth.auth === true) {
+      this.router.navigate(['/home']);
+    };
+  };
 }
