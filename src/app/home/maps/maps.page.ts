@@ -16,6 +16,7 @@ import {
   GoogleMapOptions
 } from '@ionic-native/google-maps';
 import { PlaceService } from 'src/app/place.service';
+import { Place } from 'src/app/place';
 
 @Component({
   selector: 'app-maps',
@@ -34,7 +35,8 @@ export class MapsPage implements OnInit {
     public toastCtrl: ToastController,
     private platform: Platform,
     private placeService: PlaceService,
-    private route: NavController) { }
+    private route: NavController,
+    private place: Place) { }
 
   async ngOnInit() {
     // Since ngOnInit() is executed before `deviceready` event,
@@ -45,7 +47,6 @@ export class MapsPage implements OnInit {
 
   loadmap() {
     LocationService.getMyLocation().then((myLocation: MyLocation) => {
-      console.log(myLocation.latLng);
       let options: GoogleMapOptions = {
         camera: {
           target: myLocation.latLng,
@@ -73,6 +74,16 @@ export class MapsPage implements OnInit {
       });
 
       this.getMarkers();
+
+      this.map.on(GoogleMapsEvent.MAP_CLICK).subscribe((params: any[]) => {
+        let latLng = params[0];
+    
+        this.map.addMarkerSync({
+          position: latLng,
+          title: latLng,
+          animation: GoogleMapsAnimation.DROP
+        });
+      });    
     })
       .catch(err => {
         this.showToast(err.error_message);
@@ -80,20 +91,26 @@ export class MapsPage implements OnInit {
   }
 
 
-  getMarkers() {
-    this.places = this.placeService.getPlaces();
-    const places = this.places;
-    for (let place of places) {
-      this.addMarkersToMap(place);
-    }
-  }
+  async getMarkers() {
+    var myLocation = await LocationService.getMyLocation();
+    var lng = myLocation.latLng.lng;
+    var lat = myLocation.latLng.lat;
+    const locationsObservable = this.placeService.getPlaces(lng, lat);
+    
+    locationsObservable.subscribe((placesData: Place[])=> {
+      this.places = placesData;
+      for(let place of this.places){
+        this.addMarkersToMap(place);
+      };
+    });
+  };
 
   addMarkersToMap(place) {
     this.map.addMarker({
-      'position': { lat: place.latitude, lng: place.longitude },
+      'position': { lat: place.location.coordinates[1], lng: place.location.coordinates[0] },
       'icon': "https://img.icons8.com/nolan/64/000000/marker.png",
       'animation': GoogleMapsAnimation.BOUNCE,
-      'title': place.title,
+      'title': place.name,
 
     }).then((marker: Marker) => {
       marker.addEventListener(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
