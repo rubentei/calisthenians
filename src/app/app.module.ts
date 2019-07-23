@@ -17,6 +17,8 @@ import { User } from './user';
 import { EventItem } from './event-item';
 
 import { HttpClientModule } from '@angular/common/http';
+import { PlaceService } from './place.service';
+import { Place } from './place';
 
 
 @NgModule({
@@ -30,6 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     NativeGeocoder,
     User,
     EventItem,
+    PlaceService,
+    Place,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
